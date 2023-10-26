@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  ErrorDiv,
   Input,
   InputDiv,
   RadioInput,
@@ -35,8 +36,8 @@ const RadioButton = ({
     if (selectedRadio) {
       setSelectedRadio("");
     } else {
+      console.log(e.target.value,"e.target.value");
       setSelectedRadio(e.target.value);
-      console.log(e.target.value);
     }
   };
 
@@ -60,16 +61,6 @@ const RadioButton = ({
           <RadioLabel htmlFor="radio">{label}</RadioLabel>
         </RadioWrapper>
         
-      </>
-      <>
-      {!selectedRadio && (
-        <ErrorMessage
-        component="div"
-        name="radio"
-        // className="invalid-feedback"
-      />
-      )}
-      
       </>
     </>
   );

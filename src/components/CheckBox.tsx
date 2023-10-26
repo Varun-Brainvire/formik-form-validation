@@ -3,6 +3,7 @@ import {
   CheckBoxInput,
   CheckBoxLabel,
   CheckBoxWrapper,
+  ErrorDiv,
 } from "./styles/Form.styled";
 import { ErrorMessage } from "formik";
 
@@ -48,11 +49,9 @@ const CheckBox = ({ label, type, errors, handleChange,values }: Props) => {
         <CheckBoxLabel>{label}</CheckBoxLabel>        
       </CheckBoxWrapper>
       {!values.singleCheckBox && (
-          <ErrorMessage
-          component="div"
-          name="lastName"
-          // className="invalid-feedback"
-        />
+          <ErrorDiv>
+          <ErrorMessage component="span" name="singleCheckBox" />
+          </ErrorDiv>
         )}
     </>
   );

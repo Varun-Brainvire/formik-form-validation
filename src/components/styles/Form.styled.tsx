@@ -18,6 +18,8 @@ export const RegistrationForm = styled.h2`
   color: black;
   font-family: Open Sans, sans-serif;
   text-align: center;
+  margin-bottom: 10%;
+  margin-top: 14%;
 `;
 export const InputLabel = styled.h4`
   color: #313131;
@@ -36,6 +38,7 @@ export const IconDiv = styled.div`
   border: 1px solid black;
   background-color: transparent;
   padding: 5px;
+  background-color: #f6d9d5;
   /* border: 1px solid black;
     margin-bottom: 60px; */
 `;
@@ -45,7 +48,7 @@ export const InputDiv = styled.div`
   width: 100%;
   margin: 0px -5px;
   justify-content: center;
-  gap: 10px;
+  gap: 2px;
 `;
 
 export const FirstNameDiv = styled.div`
@@ -62,14 +65,15 @@ export const Input = styled.input<Props>`
   background: transparent;
   outline: none;
   border: ${(props) => props.borderColor};
-  border-radius: 0 !important;
-  /* border: none; */
   width: 100%;
   height: 40px;
   line-height: 1.4rem;
   font-size: medium;
+  background-color: #f6d9d5;
+  border-color: #313131;
   :focus {
     border-color: #000000;
+    /* background-color: #f7d0cb; */
   }
 `;
 
@@ -117,7 +121,7 @@ export const CustomSelect = styled(Select)`
   & > div[class*="control"] {
     border: none;
     color: black;
-    background: #fff;
+    background: #f7d0cb;
     border-radius: 4px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   }
@@ -126,6 +130,7 @@ export const CustomSelect = styled(Select)`
 export const RadioWrapper = styled.div`
   display: flex;
   align-items: center;
+  background-color: #f6d9d5;
   background: transparent;
   outline: none;
   border: black 1px solid;
@@ -141,20 +146,7 @@ export const RadioWrapper = styled.div`
 `;
 
 export const RadioInput = styled.input`
-  /* width: 20px;
-  height: 20px;
-  background-color: white;
-  border-radius: 50%;
-  vertical-align: middle;
-  border: 1px solid #000;
-  appearance: none;
-  -webkit-appearance: none;
-  outline: none;
-  cursor: pointer;
-  & :checked {
-    background-color: #000;
-  } */
-
+  background-color: #f6d9d5;
   appearance: none;
   width: 20px;
   height: 20px;
@@ -166,7 +158,6 @@ export const RadioInput = styled.input`
   &:checked {
     background-color: #000;
   }
-
 `;
 
 export const RadioLabel = styled.label`
@@ -178,6 +169,7 @@ export const CheckBoxInput = styled(Field)`
   margin-right: 10px;
   width: 20px;
   height: 20px;
+  background-color: #f6d9d5;
 
   &:after {
     width: 20px;
@@ -208,7 +200,7 @@ export const CheckBoxLabel = styled.label`
 `;
 
 export const SubmitButton = styled.button`
-  background-color: #313131!important;
+  background-color: #313131 !important;
   border-radius: 0 !important;
   color: #fff;
   font-weight: 700;
@@ -217,3 +209,7 @@ export const SubmitButton = styled.button`
   font-size: 1.03em;
 `;
 
+export const ErrorDiv = styled.div`
+  min-width: 9.2em;
+  color: red;
+`;

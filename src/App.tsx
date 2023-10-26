@@ -15,6 +15,7 @@ import {
   SelectWrapper,
   CustomSelect,
   SubmitButton,
+  ErrorDiv,
 } from "./components/styles/Form.styled";
 import { GlobalStyle } from "./components/styles/Global.styled";
 import RadioButton from "./components/RadioButton";
@@ -22,6 +23,7 @@ import CheckBox from "./components/CheckBox";
 import { FaEnvelope, FaAddressCard } from "react-icons/fa";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
+import ReferralSelect from "./components/ReferalSelect";
 
 const App: React.FC = () => {
   const [countryOption, setCountryOption] = useState();
@@ -30,8 +32,30 @@ const App: React.FC = () => {
   const [countrySelected, setCountrySelected] = useState<any>("");
   const [stateSelected, setStateSelected] = useState<any>();
   const [citySelected, setCitySelected] = useState();
-
   const [selectedRadio, setSelectedRadio] = useState("");
+
+  const customStyles = {
+    control: (provided: any, state: any) => ({
+      ...provided,
+      border: "none !important;",
+      borderRadius: "4px",
+      backgroundColor: "#f6d9d5",
+      boxShadow: state.isFocused ? "1px solid #313131;" : "none",
+      "&:hover": {
+        border: "1px solid #313131",
+      },
+    }),
+    option: (provided: any, state: any) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#f6d9d5" : "white",
+      color: state.isSelected ? "white" : "black",
+      "&:hover": {
+        backgroundColor: "#f6d9d5;",
+        color: "black",
+      },
+    }),
+  };
+
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const validationSchema = Yup.object().shape({
@@ -52,7 +76,11 @@ const App: React.FC = () => {
     city: Yup.object().required("Please Select City"),
     date: Yup.string().required("Please Select Date"),
     radio: Yup.string().required("Please Select Any One Option"),
-    singleCheckBox: Yup.boolean().required("Please Check The Check Box")
+    singleCheckBox: Yup.boolean().oneOf(
+      [true],
+      "Please accept the terms and conditions"
+    ),
+    referal: Yup.string().required("Please select any one option"),
   });
 
   useEffect(() => {
@@ -108,7 +136,8 @@ const App: React.FC = () => {
             phone: "",
             date: "",
             radio: "",
-            singleCheckBox:false
+            singleCheckBox: false,
+            referal: "",
           }}
           validationSchema={validationSchema}
           onSubmit={(values, actions) => {
@@ -125,6 +154,7 @@ const App: React.FC = () => {
             isValidating,
             isValid,
             handleChange,
+            setFieldValue,
           }) => {
             return (
               <>
@@ -141,11 +171,11 @@ const App: React.FC = () => {
                           name="firstName"
                           onChange={handleChange}
                         />
+                        <ErrorDiv>
+                          <ErrorMessage component="span" name="firstName" />
+                        </ErrorDiv>
                       </FirstNameDiv>
-                      {/* {errors.firstName && touched.firstName && (
-                        <span>{JSON.stringify(errors.firstName)}</span>
-                      )} */}
-                      <ErrorMessage component="div" name="firstName" />
+
                       <SecondNameDiv>
                         <Input
                           placeholder="Second name"
@@ -153,12 +183,10 @@ const App: React.FC = () => {
                           name="lastName"
                           onChange={handleChange}
                         />
+                        <ErrorDiv>
+                          <ErrorMessage component="span" name="lastName" />
+                        </ErrorDiv>
                       </SecondNameDiv>
-                      <ErrorMessage
-                        component="div"
-                        name="lastName"
-                        // className="invalid-feedback"
-                      />
                     </InputDiv>
                   </NormalDiv>
 
@@ -173,11 +201,9 @@ const App: React.FC = () => {
                         onChange={handleChange}
                       />
                     </IconDiv>
-                    <ErrorMessage
-                      component="div"
-                      name="email"
-                      // className="invalid-feedback"
-                    />
+                    <ErrorDiv>
+                      <ErrorMessage component="span" name="email" />
+                    </ErrorDiv>
                   </NormalDiv>
 
                   <NormalDiv>
@@ -186,6 +212,7 @@ const App: React.FC = () => {
                       <FaAddressCard />
                       <SelectWrapper>
                         <CustomSelect
+                          styles={customStyles}
                           name="country"
                           id="country"
                           options={countryOption}
@@ -205,11 +232,9 @@ const App: React.FC = () => {
                         />
                       </SelectWrapper>
                     </IconDiv>
-                    <ErrorMessage
-                      component="div"
-                      name="country"
-                      // className="invalid-feedback"
-                    />
+                    <ErrorDiv>
+                      <ErrorMessage component="span" name="country" />
+                    </ErrorDiv>
                   </NormalDiv>
 
                   <NormalDiv>
@@ -218,6 +243,7 @@ const App: React.FC = () => {
                       <FaAddressCard />
                       <SelectWrapper>
                         <CustomSelect
+                          styles={customStyles}
                           name="state"
                           id="state"
                           options={stateOption}
@@ -232,11 +258,9 @@ const App: React.FC = () => {
                         />
                       </SelectWrapper>
                     </IconDiv>
-                    <ErrorMessage
-                      component="div"
-                      name="state"
-                      // className="invalid-feedback"
-                    />
+                    <ErrorDiv>
+                      <ErrorMessage component="span" name="state" />
+                    </ErrorDiv>
                   </NormalDiv>
 
                   <NormalDiv>
@@ -245,6 +269,7 @@ const App: React.FC = () => {
                       <FaAddressCard />
                       <SelectWrapper>
                         <CustomSelect
+                          styles={customStyles}
                           name="city"
                           id="city"
                           options={cityOption}
@@ -259,11 +284,9 @@ const App: React.FC = () => {
                         />
                       </SelectWrapper>
                     </IconDiv>
-                    <ErrorMessage
-                      component="div"
-                      name="city"
-                      // className="invalid-feedback"
-                    />
+                    <ErrorDiv>
+                      <ErrorMessage component="span" name="city" />
+                    </ErrorDiv>
                   </NormalDiv>
 
                   <NormalDiv>
@@ -275,11 +298,9 @@ const App: React.FC = () => {
                         onChange={handleChange}
                       />
                     </InputDiv>
-                    <ErrorMessage
-                      component="div"
-                      name="phone"
-                      // className="invalid-feedback"
-                    />
+                    <ErrorDiv>
+                      <ErrorMessage component="span" name="city" />
+                    </ErrorDiv>
                   </NormalDiv>
 
                   <NormalDiv>
@@ -304,11 +325,9 @@ const App: React.FC = () => {
               // }}
             /> */}
                     </InputDiv>
-                    <ErrorMessage
-                      component="div"
-                      name="date"
-                      // className="invalid-feedback"
-                    />
+                    <ErrorDiv>
+                      <ErrorMessage component="span" name="date" />
+                    </ErrorDiv>
                   </NormalDiv>
 
                   <NormalDiv>
@@ -355,6 +374,11 @@ const App: React.FC = () => {
                         <Input />
                       </InputDiv>
                     )}
+                    {!selectedRadio && (
+                      <ErrorDiv>
+                        <ErrorMessage component="span" name="radio" />
+                      </ErrorDiv>
+                    )}
                   </NormalDiv>
 
                   <NormalDiv>
@@ -363,6 +387,18 @@ const App: React.FC = () => {
                       values={values}
                       label="I have read,understood and accepted the PRIVACY POLICY for the membership. Terms and Conditions"
                     />
+                  </NormalDiv>
+
+                  <NormalDiv>
+                    <ReferralSelect
+                      name="referal"
+                      setFieldValue={setFieldValue}
+                    />
+                    {errors.referal && touched.referal && (
+                      <ErrorDiv>
+                        <ErrorMessage component="span" name="referal" />
+                      </ErrorDiv>
+                    )}
                   </NormalDiv>
 
                   <NormalDiv>

@@ -50,6 +50,7 @@ const RadioButton = ({
             name="radio"
             value={label}
             onChange={(e) => {
+              console.log(selectedRadio)
               console.log(e.target.value);
               handleChange(e.target.value);
               handleCheckChange(e);
@@ -61,11 +62,14 @@ const RadioButton = ({
         
       </>
       <>
-      <ErrorMessage
-          component="div"
-          name="radio"
-          // className="invalid-feedback"
-        />
+      {!selectedRadio && (
+        <ErrorMessage
+        component="div"
+        name="radio"
+        // className="invalid-feedback"
+      />
+      )}
+      
       </>
     </>
   );

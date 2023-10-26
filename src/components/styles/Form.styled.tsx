@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Select from "react-select";
+import { Formik, Form, ErrorMessage, Field } from "formik";
 
 interface Props {
   borderColor?: string;
@@ -172,7 +173,7 @@ export const RadioLabel = styled.label`
   margin-left: 10px;
 `;
 
-export const CheckBoxInput = styled.input`
+export const CheckBoxInput = styled(Field)`
   cursor: pointer;
   margin-right: 10px;
   width: 20px;

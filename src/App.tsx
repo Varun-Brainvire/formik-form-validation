@@ -52,6 +52,7 @@ const App: React.FC = () => {
     city: Yup.object().required("Please Select City"),
     date: Yup.string().required("Please Select Date"),
     radio: Yup.string().required("Please Select Any One Option"),
+    singleCheckBox: Yup.boolean().required("Please Check The Check Box")
   });
 
   useEffect(() => {
@@ -107,6 +108,7 @@ const App: React.FC = () => {
             phone: "",
             date: "",
             radio: "",
+            singleCheckBox:false
           }}
           validationSchema={validationSchema}
           onSubmit={(values, actions) => {
@@ -358,6 +360,7 @@ const App: React.FC = () => {
                   <NormalDiv>
                     <CheckBox
                       handleChange={handleChange}
+                      values={values}
                       label="I have read,understood and accepted the PRIVACY POLICY for the membership. Terms and Conditions"
                     />
                   </NormalDiv>
